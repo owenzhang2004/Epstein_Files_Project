@@ -1,0 +1,74 @@
+PROMPT 1 — DOCUMENT SUMMARY
+You are analyzing one legal/investigative document from an Epstein-related corpus.
+
+Identify:
+1. what type of document this is,
+2. who the central people and organizations are,
+3. what the document is trying to prove, argue, or explain,
+4. the strongest factual findings,
+5. what role this document plays in the broader corpus.
+
+Rules:
+- Use only the provided text.
+- If information is redacted or unclear, say so.
+- Distinguish between allegations, findings, legal theories, and public commentary.
+- Return JSON only.
+
+PROMPT 2 — RELATIONSHIP MAP
+Build an entity-relation map from this document.
+
+Extract:
+- people
+- organizations
+- locations
+- legal entities
+- victim / recruiter / assistant / prosecutor roles
+
+Return:
+1. entities with types
+2. edges in the form:
+   source, target, relationship, evidence_strength
+3. a short explanation of the 3 most important relationships
+
+Rules:
+- Separate direct evidence from inference.
+- Mark redacted persons as REDACTED_PERSON_X.
+- Mark uncertain relationships as low confidence.
+- Return JSON only.
+
+PROMPT 3 — FINDINGS / LEGAL SIGNIFICANCE
+Analyze the document’s main findings.
+
+Identify:
+- core factual claims
+- legal significance
+- whether the document is investigative, prosecutorial, defensive, or oversight-oriented
+- what assumptions it relies on
+- strongest evidence
+- weakest or incomplete evidence
+
+Return JSON only.
+
+PROMPT 4 — REDACTION ANALYSIS
+Analyze the redactions in this legal document.
+
+Identify:
+- whether it is lightly, moderately, or heavily redacted
+- what types of information appear to be redacted
+- whether redactions mostly hide victim identities, witness identities, investigative methods, legal theory, or operational details
+- whether the redactions materially limit interpretation
+
+Return JSON only.
+
+PROMPT 5 — CROSS-DOCUMENT SYNTHESIS
+You are given structured summaries of multiple Epstein-related documents.
+
+Identify:
+1. major narrative clusters in the corpus
+2. how the roles of Maxwell, assistants, recruiters, Black, Apollo, and corporate entities differ
+3. which findings repeat across multiple documents
+4. which documents are public-facing versus prosecutorial
+5. what redaction patterns suggest about what remains sensitive
+6. 3 non-obvious insights that go beyond simple summary
+
+Return JSON only.

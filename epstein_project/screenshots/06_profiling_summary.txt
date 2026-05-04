@@ -1,0 +1,121 @@
+oz2048_nyu_edu@nyu-dataproc-m:~/epstein_final$ spark-shell --master yarn --deploy-mode client -i profiling_code/ProfileExtractedDocs.scala
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/04/22 02:20:41 INFO SparkEnv: Registering MapOutputTracker
+26/04/22 02:20:41 INFO SparkEnv: Registering BlockManagerMaster
+26/04/22 02:20:41 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+26/04/22 02:20:41 INFO SparkEnv: Registering OutputCommitCoordinator
+Spark context Web UI available at http://nyu-dataproc-m.c.hpc-dataproc-19b8.internal:43151
+Spark context available as 'sc' (master = yarn, app id = application_1768446951072_17951).
+Spark session available as 'spark'.
+=== TOTAL DOCUMENT COUNT ===                                                    
+8                                                                               
+=== SCHEMA ===
+root
+ |-- dataset_id: string (nullable = true)
+ |-- file_id: string (nullable = true)
+ |-- file_name: string (nullable = true)
+ |-- local_raw_path: string (nullable = true)
+ |-- hdfs_raw_path: string (nullable = true)
+ |-- document_category: string (nullable = true)
+ |-- extraction_method: string (nullable = true)
+ |-- ocr_needed: string (nullable = true)
+ |-- extraction_success: string (nullable = true)
+ |-- text_length_chars: string (nullable = true)
+ |-- text_preview: string (nullable = true)
+ |-- extracted_text: string (nullable = true)
+ |-- text_length_int: integer (nullable = true)
+
+=== SAMPLE ROWS ===
++----------------+-----------------------+-----------------+----------+------------------+---------------+
+|file_name       |document_category      |extraction_method|ocr_needed|extraction_success|text_length_int|
++----------------+-----------------------+-----------------+----------+------------------+---------------+
+|EFTA02730996.pdf|investigation_memo     |pdftotext        |0         |1                 |50778          |
+|EFTA02731018.pdf|senate_letter          |pdftotext        |0         |1                 |14385          |
+|EFTA02731039.pdf|prosecution_memo       |pdftotext        |0         |1                 |38741          |
+|EFTA02731069.pdf|corporate_analysis     |pdftotext        |0         |1                 |7765           |
+|EFTA02731082.pdf|investigation_memo     |pdftotext        |0         |1                 |190432         |
+|EFTA02731168.pdf|prosecution_memo       |pdftotext        |0         |1                 |43262          |
+|EFTA02731200.pdf|assistant_analysis     |pdftotext        |0         |1                 |30454          |
+|EFTA02731226.pdf|superseding_prosecution|pdftotext        |0         |1                 |51165          |
++----------------+-----------------------+-----------------+----------+------------------+---------------+
+
+=== DOCUMENTS BY CATEGORY ===
++-----------------------+-----+                                                 
+|document_category      |count|
++-----------------------+-----+
+|investigation_memo     |2    |
+|prosecution_memo       |2    |
+|assistant_analysis     |1    |
+|corporate_analysis     |1    |
+|senate_letter          |1    |
+|superseding_prosecution|1    |
++-----------------------+-----+
+
+=== EXTRACTION METHOD BREAKDOWN ===
++-----------------+-----+
+|extraction_method|count|
++-----------------+-----+
+|pdftotext        |8    |
++-----------------+-----+
+
+=== OCR NEEDED BREAKDOWN ===
++----------+-----+
+|ocr_needed|count|
++----------+-----+
+|0         |8    |
++----------+-----+
+
+=== EXTRACTION SUCCESS BREAKDOWN ===
++------------------+-----+
+|extraction_success|count|
++------------------+-----+
+|1                 |8    |
++------------------+-----+
+
+=== TEXT LENGTH STATS ===
++---------------+---------------+---------------+
+|min_text_length|max_text_length|avg_text_length|
++---------------+---------------+---------------+
+|7765           |190432         |53372.75       |
++---------------+---------------+---------------+
+
+=== LONGEST DOCUMENTS ===
++----------------+-----------------------+---------------+
+|file_name       |document_category      |text_length_int|
++----------------+-----------------------+---------------+
+|EFTA02731082.pdf|investigation_memo     |190432         |
+|EFTA02731226.pdf|superseding_prosecution|51165          |
+|EFTA02730996.pdf|investigation_memo     |50778          |
+|EFTA02731168.pdf|prosecution_memo       |43262          |
+|EFTA02731039.pdf|prosecution_memo       |38741          |
+|EFTA02731200.pdf|assistant_analysis     |30454          |
+|EFTA02731018.pdf|senate_letter          |14385          |
+|EFTA02731069.pdf|corporate_analysis     |7765           |
++----------------+-----------------------+---------------+
+
+=== SHORTEST DOCUMENTS ===
++----------------+-----------------------+---------------+
+|file_name       |document_category      |text_length_int|
++----------------+-----------------------+---------------+
+|EFTA02731069.pdf|corporate_analysis     |7765           |
+|EFTA02731018.pdf|senate_letter          |14385          |
+|EFTA02731200.pdf|assistant_analysis     |30454          |
+|EFTA02731039.pdf|prosecution_memo       |38741          |
+|EFTA02731168.pdf|prosecution_memo       |43262          |
+|EFTA02730996.pdf|investigation_memo     |50778          |
+|EFTA02731226.pdf|superseding_prosecution|51165          |
+|EFTA02731082.pdf|investigation_memo     |190432         |
++----------------+-----------------------+---------------+
+
+=== CATEGORY-LEVEL TEXT LENGTH STATS ===
++-----------------------+---------+-------+-------+--------+
+|document_category      |doc_count|min_len|max_len|avg_len |
++-----------------------+---------+-------+-------+--------+
+|investigation_memo     |2        |50778  |190432 |120605.0|
+|superseding_prosecution|1        |51165  |51165  |51165.0 |
+|prosecution_memo       |2        |38741  |43262  |41001.5 |
+|assistant_analysis     |1        |30454  |30454  |30454.0 |
+|senate_letter          |1        |14385  |14385  |14385.0 |
+|corporate_analysis     |1        |7765   |7765   |7765.0  |
++-----------------------+---------+-------+-------+--------+

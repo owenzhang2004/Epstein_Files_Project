@@ -1,0 +1,2 @@
+# Run Spark profiling script
+spark-shell --master yarn --deploy-mode client -i profiling_code/ProfileExtractedDocs.scala

@@ -1,0 +1,11 @@
+# Download PDFs from HDFS to local
+hdfs dfs -get /user/oz2048_nyu_edu/epstein_final/raw_pdfs/*.pdf ~/epstein_etl/raw_pdfs/
+
+# Run text extraction
+python3 extract_epstein_text.py
+
+# Create HDFS directory for extracted CSV
+hdfs dfs -mkdir -p /user/oz2048_nyu_edu/epstein_final/extracted_docs_csv
+
+# Upload extracted CSV to HDFS
+hdfs dfs -put -f ~/epstein_etl/extracted_docs.csv /user/oz2048_nyu_edu/epstein_final/extracted_docs_csv/

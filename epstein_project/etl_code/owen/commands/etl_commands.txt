@@ -1,0 +1,5 @@
+# Run Spark ETL to convert CSV → Parquet
+spark-shell --master yarn --deploy-mode client -i CsvToParquet.scala
+
+# Verify Parquet output in HDFS
+hdfs dfs -ls /user/oz2048_nyu_edu/epstein_final/extracted_docs/
