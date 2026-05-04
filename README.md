@@ -1,9 +1,7 @@
 PROJECT: Epstein Document Analysis Pipeline
 AUTHOR: Owen Zhang
 
-========================================
 1. PROJECT OVERVIEW
-========================================
 
 This project builds a full Big Data pipeline on NYU Dataproc to ingest, clean,
 transform, and analyze a corpus of Epstein-related legal and investigative documents.
